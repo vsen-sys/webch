@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NEXUS // Hub</title>
+<style>
+  :root {
+    --bg: #070b14;
+    --bg2: #0c1220;
+    --card: rgba(17, 24, 42, 0.72);
+    --card-border: rgba(99, 120, 255, 0.18);
+    --neon: #4cc9f0;
+    --neon2: #8b5cf6;
+    --red: #ff2d55;
+    --green: #35e0a1;
+    --text: #e6ecff;
+    --dim: #8a94b3;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Segoe UI", "Poppins", system-ui, sans-serif;
+    background: radial-gradient(1200px 800px at 20% -10%, #16224d 0%, transparent 50%),
+                radial-gradient(1000px 700px at 100% 10%, #3b0f2e 0%, transparent 45%),
+                var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ---------- background animado ---------- */
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-image:
+      linear-gradient(rgba(76, 201, 240, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(76, 201, 240, 0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+
+  .glow-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.35;
+    z-index: -1;
+    animation: float 14s ease-in-out infinite;
+  }
+  .orb1 { width: 420px; height: 420px; background: #2563eb; top: -120px; left: -120px; }
+  .orb2 { width: 360px; height: 360px; background: #7c3aed; bottom: -100px; right: -80px; animation-delay: -6s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.08); }
+  }
+
+  .scanline {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 3px,
+      rgba(255, 255, 255, 0.015) 3px,
+      rgba(255, 255, 255, 0.015) 4px
+    );
+  }
+
+  /* ---------- nav ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    background: rgba(7, 11, 20, 0.75);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+  }
+  .logo .dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 14px var(--red);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.6; }
+  }
+
+  .logo span { background: linear-gradient(90deg, var(--neon), var(--neon2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  .nav-links { display: flex; gap: 6px; }
+  .nav-links a {
+    color: var(--dim);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    transition: all 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); background: rgba(76, 201, 240, 0.1); }
+  .nav-links a.active { color: var(--neon); background: rgba(76, 201, 240, 0.12); }
+
+  .online-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(53, 224, 161, 0.35);
+    background: rgba(53, 224, 161, 0.08);
+    font-size: 0.85rem;
+    color: var(--green);
+    font-weight: 600;
+  }
+  .online-pill .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 10px var(--green);
+  }
+
+  /* ---------- hero ---------- */
+  header.hero {
+    text-align: center;
+    padding: 90px 24px 60px;
+    position: relative;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--card-border);
+    background: rgba(17, 24, 42, 0.6);
+    font-size: 0.82rem;
+    color: var(--dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .badge .blink { color: var(--red); }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 1.05;
+  }
+  .hero h1 .grad {
+    background: linear-gradient(92deg, var(--neon), var(--neon2), var(--red));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero p.sub {
+    margin-top: 18px;
+    color: var(--dim);
+    font-size: 1.05rem;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ip-card-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+  .ip-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 22px 30px;
+    border-radius: 20px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 20px 60px rgba(37, 99, 235, 0.25);
+  }
+  .ip-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(120deg, var(--neon), transparent 40%, var(--neon2));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.6;
+  }
+  .ip-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--dim);
+    text-align: left;
+  }
+  .ip-value {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 800;
+    font-family: "Consolas", "Courier New", monospace;
+    color: var(--neon);
+    letter-spacing: 1px;
+  }
+  .ip-copy {
+    background: linear-gradient(90deg, var(--neon), var(--neon2));
+    color: #061120;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.15s, filter 0.15s;
+  }
+  .ip-copy:hover { transform: translateY(-2px); filter: brightness(1.1); }
+  .ip-copy:active { transform: scale(0.96); }
+
+  /* ---------- sections ---------- */
+  main { max-width: 1200px; margin: 0 auto; padding: 30px 24px 100px; }
+
+  .section { scroll-margin-top: 80px; margin-bottom: 70px; }
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 26px;
+  }
+  .section-head .icon {
+    width: 46px; height: 46px;
+    display: grid; place-items: center;
+    border-radius: 14px;
+    font-size: 1.4rem;
+    background: rgba(76, 201, 240, 0.1);
+    border: 1px solid var(--card-border);
+  }
+  .section-head h2 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.4px; }
+  .section-head p { color: var(--dim); font-size: 0.92rem; margin-top: 2px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 22px;
+  }
+
+  .card {
+    position: relative;
+    border-radius: 18px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    padding: 22px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    overflow: hidden;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(76, 201, 240, 0.45);
+    box-shadow: 0 18px 50px rgba(37, 99, 235, 0.28);
+  }
+  .card .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .card h3 { font-size: 1.05rem; font-weight: 700; }
+  .card .tag {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .tag.blue { color: var(--neon); background: rgba(76, 201, 240, 0.12); }
+  .tag.green { color: var(--green); background: rgba(53, 224, 161, 0.12); }
+  .tag.purple { color: var(--neon2); background: rgba(139, 92, 246, 0.14); }
+  .tag.red { color: #ff6b8b; background: rgba(255, 45, 85, 0.12); }
+
+  .card p {
+    color: var(--dim);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.88rem;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: 1px solid transparent;
+    background: none;
+    color: var(--text);
+    font-family: inherit;
+  }
+  .btn.primary {
+    background: linear-gradient(92deg, var(--neon), var(--neon2));
+    color: #061120;
+  }
+  .btn.primary:hover { filter: brightness(1.1); transform: translateY(-2px); }
+  .btn.ghost { border-color: var(--card-border); color: var(--dim); background: rgba(17, 24, 42, 0.5); }
+  .btn.ghost:hover { color: var(--text); border-color: var(--neon); }
+  .btn.redbg { background: var(--red); color: #fff; }
+  .btn.redbg:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+  .btn.doing::after { content: "..."; }
+
+  /* ---------- stats strip ---------- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+    margin-bottom: 70px;
+  }
+  .stat {
+    text-align: center;
+    padding: 24px 12px;
+    border-radius: 16px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+  }
+  .stat b { font-size: 1.7rem; font-weight: 900; color: var(--neon); display: block; }
+  .stat span { color: var(--dim); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ---------- config display ---------- */
+  .cfg-view {
+    background: #05080f;
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 18px;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: #9fe8ff;
+    overflow-x: auto;
+    white-space: pre;
+    max-height: 320px;
+    overflow-y: auto;
+  }
+  .cfg-view .cmt { color: #4a5470; }
+  .cfg-view .key { color: #7fd8a4; }
+  .cfg-view .val { color: #ffd479; }
+
+  /* ---------- download table ---------- */
+  .dlist {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .drow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border-radius: 14px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    transition: border-color 0.2s;
+  }
+  .drow:hover { border-color: rgba(76, 201, 240, 0.4); }
+  .drow .dicon {
+    width: 44px; height: 44px;
+    display: grid; place-items: center;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    background: rgba(76, 201, 240, 0.1);
+    flex-shrink: 0;
+  }
+  .drow .din { flex: 1; min-width: 0; }
+  .drow .din b { display: block; font-size: 0.98rem; }
+  .drow .din span { color: var(--dim); font-size: 0.82rem; }
+  .drow .din .size { color: var(--green); font-weight: 700; font-size: 0.78rem; }
+
+  /* ---------- footer ---------- */
+  footer {
+    text-align: center;
+    padding: 34px 20px;
+    color: var(--dim);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--card-border);
+  }
+  footer .id { font-family: monospace; color: var(--neon); }
+
+  /* ---------- toast ---------- */
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: #0d1526;
+    border: 1px solid var(--neon);
+    color: var(--text);
+    padding: 13px 26px;
+    border-radius: 12px;
+    font-weight: 600;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+    z-index: 100;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+  @media (max-width: 640px) {
+    nav { padding: 12px 16px; flex-wrap: wrap; gap: 8px; }
+    .nav-links { order: 3; width: 100%; justify-content: center; }
+    .ip-card { flex-direction: column; text-align: center; gap: 12px; padding: 20px; }
+    .ip-label { text-align: center; }
+    .hero h1 { font-size: 2.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="glow-orb orb1"></div>
+<div class="glow-orb orb2"></div>
+<div class="scanline"></div>
+
+<nav>
+  <div class="logo"><div class="dot"></div><span>NEXUS</span>&nbsp;HUB</div>
+  <div class="nav-links">
+    <a href="#home" class="active">Inicio</a>
+    <a href="#downloads">Downloads</a>
+    <a href="#visuals">Visuals</a>
+    <a href="#configs">Aimbot Configs</a>
+  </div>
+  <div class="online-pill"><div class="dot"></div>ONLINE</div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="badge"><span class="blink">&#9679;</span> Servidor da Rede Local</div>
+  <h1>BEM-VINDO AO <span class="grad">NEXUS HUB</span></h1>
+  <p class="sub">Acesso liberado para toda a rede. Procurando algo? Downloads, configs e visualizer estao logo abaixo.</p>
+
+  <div class="ip-card-wrap">
+    <div class="ip-card">
+      <div>
+        <div class="ip-label">Seu endereco da rede</div>
+        <div class="ip-value">__IP__</div>
+      </div>
+      <button class="ip-copy" onclick="copyIp()">COPIAR</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="stats">
+    <div class="stat"><b id="stat-dl">?</b><span>Arquivos de download</span></div>
+    <div class="stat"><b id="stat-vis">?</b><span>Visual presets</span></div>
+    <div class="stat"><b id="stat-cfg">?</b><span>Configs e scripts</span></div>
+    <div class="stat"><b>100%</b><span>Uptime na rede</span></div>
+  </div>
+
+  <!-- ============ DOWNLOADS ============ -->
+  <section class="section" id="downloads">
+    <div class="section-head">
+      <div class="icon">&#11015;</div>
+      <div>
+        <h2>Downloads</h2>
+        <p>Arquivos que ficam no servidor da rede. Todo mundo acessa pelo IP.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-top">
+          <h3>Pacote de Configs &#8211; Pack V1</h3>
+          <span class="tag green">Config</span>
+        </div>
+        <p>Pack com configs prontas para varios jogos e estilos de jogo. Extraia e jogue direto.</p>
+        <div class="btn-row">
+          <a class="btn primary" href="/downloads/configs-pack.zip" download>BAIXAR</a>
+          <button class="btn ghost" onclick="trouble(this)">O arquivo sumiu?</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <h3>Readme &amp; Guias</h3>
+          <span class="tag blue">Guia</span>
+        </div>
+        <p>Como instalar, onde colocar cada arquivo e como resolver os erros mais comuns.</p>
+        <div class="btn-row">
+          <a class="btn primary" href="/downloads/guia.txt" download>BAIXAR</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <h3>Programas Extras</h3>
+          <span class="tag red">Tools</span>
+        </div>
+        <p>Utilitarios que ajudam no dia a dia: injetores, testadores e afins.</p>
+        <div class="btn-row">
+          <a class="btn primary" href="/downloads/tools.zip" download>BAIXAR</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VISUALS ============ -->
+  <section class="section" id="visuals">
+    <div class="section-head">
+      <div class="icon">&#127912;</div>
+      <div>
+        <h2>Visuals</h2>
+        <p>Presets de visual pra deixar o game bonito e funcional do seu jeito.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-top">
+          <h3>Preset &#8211; Neon</h3>
+          <span class="tag blue">Esqueleto</span>
+        </div>
+        <p>Linhas limpas, cores neon e boxes com bordas suaves. Ideal pra quem gosta de minimalismo.</p>
+        <div class="btn-row">
+          <button class="btn ghost" onclick="preview()">VER CODIGO</button>
+          <a class="btn primary" href="/downloads/visual-neon.cfg" download>BAIXAR</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <h3>Preset &#8211; Glow</h3>
+          <span class="tag purple">Glow</span>
+        </div>
+        <p>Efeito de brilho ao redor dos modelos, com cor customizavel por time.</p>
+        <div class="btn-row">
+          <button class="btn ghost" onclick="preview()">VER CODIGO</button>
+          <a class="btn primary" href="/downloads/visual-glow.cfg" download>BAIXAR</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <h3>Preset &#8211; Clear</h3>
+          <span class="tag green">Minimalista</span>
+        </div>
+        <p>Menos poluicao visual: so o essencial em destaque e cores de contraste alto.</p>
+        <div class="btn-row">
+          <button class="btn ghost" onclick="preview()">VER CODIGO</button>
+          <a class="btn primary" href="/downloads/visual-clear.cfg" download>BAIXAR</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AIMBOT CONFIGS ============ -->
+  <section class="section" id="configs">
+    <div class="section-head">
+      <div class="icon">&#127919;</div>
+      <div>
+        <h2>Aimbot Configs</h2>
+        <p>Configuracoes prontas de aim: sensibilidade, smooth, FOV e mais. Clique pra previsualizar.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-top">
+          <h3>Config CLI &#8211; Snap</h3>
+          <span class="tag red">Rapido</span>
+        </div>
+        <p>Rapidez filada, smooth baixo. Pra quem quer travar no alvo imediato.</p>
+        <div class="btn-row">
+          <button class="btn ghost" onclick="showCfg('snap')">VER CONFIG</button>
+          <a class="btn primary" href="/downloads/aim-snap.cfg" download>BAIXAR</a>
+        </div>
+        <pre class="cfg-view" id="cfg-snap" style="display:none"><span class="cmt">-- Config Snap v1.0</span>
+<span class="key">smooth</span>            <span class="val">1.0</span>
+<span class="key">fov</span>              <span class="val">90</span>
+<span class="key">bone</span>             <span class="val">head</span>
+<span class="key">aimkey</span>           <span class="val">MOUSE_LEFT</span>
+<span class="key">vischeck</span>         <span class="val">true</span></pre>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <h3>Config CLOSE RANGE</h3>
+          <span class="tag purple">??????</span>
+        </div>
+        <p>Smooth medio e prioridade pro bone mais proximo. Equilibrio entre velocidade e natural.</p>
+        <div class="btn-row">
+          <button class="btn ghost" onclick="showCfg('mix')">VER CONFIG</button>
+          <a class="btn primary" href="/downloads/aim-mix.cfg" download>BAIXAR</a>
+        </div>
+        <pre class="cfg-view" id="cfg-mix" style="display:none"><span class="cmt">-- Config Mix v1.0</span>
+<span class="key">smooth</span>            <span class="val">3.0</span>
+<span class="key">fov</span>              <span class="val">120</span>
+<span class="key">bone</span>             <span class="val">closest</span>
+<span class="key">aimkey</span>           <span class="val">MOUSE_RIGHT</span>
+<span class="key">vischeck</span>         <span class="val">true</span></pre>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <h3>Config SNIPER</h3>
+          <span class="tag green">Distancia</span>
+        </div>
+        <p>FOV curto e smooth alto pra longas distancias. Discreto e preciso.</p>
+        <div class="btn-row">
+          <button class="btn ghost" onclick="showCfg('sniper')">VER CONFIG</button>
+          <a class="btn primary" href="/downloads/aim-sniper.cfg" download>BAIXAR</a>
+        </div>
+        <pre class="cfg-view" id="cfg-sniper" style="display:none"><span class="cmt">-- Config Sniper v1.0</span>
+<span class="key">smooth</span>            <span class="val">8.0</span>
+<span class="key">fov</span>              <span class="val">45</span>
+<span class="key">bone</span>             <span class="val">head</span>
+<span class="key">aimkey</span>           <span class="val">MOUSE_RIGHT</span>
+<span class="key">vischeck</span>         <span class="val">false</span></pre>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  NEXUS HUB &middot; rodando na rede local &middot; IP: <span class="id">__IP__</span><br/>
+  feito pra uso interno &middot; <span style="color:var(--dim)">suporte: fale com quem te passou o link</span>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  function toast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 2400);
+  }
+
+  function copyIp() {
+    const ip = "__IP__";
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(ip).then(() => toast("IP copiado: " + ip));
+    } else {
+      toast("IP: " + ip);
+    }
+  }
+
+  fetch("/api/ip").then(r => r.json()).then(d => {
+    if (d.ips && d.ips[0]) {
+      document.querySelector(".ip-value").textContent = d.primary;
+    }
+  }).catch(() => {});
+
+  document.querySelectorAll(".nav-links a").forEach(a => {
+    a.addEventListener("click", () => {
+      document.querySelectorAll(".nav-links a").forEach(x => x.classList.remove("active"));
+      a.classList.add("active");
+    });
+  });
+
+  function showCfg(name) {
+    const el = document.getElementById("cfg-" + name);
+    el.style.display = el.style.display === "none" ? "block" : "none";
+  }
+
+  function preview() {
+    toast("Previsualizacao disponivel na secao de configs acima.");
+  }
+
+  function trouble(btn) {
+    btn.classList.add("doing");
+    btn.textContent = "Rechecando...";
+    setTimeout(() => {
+      btn.textContent = "Verifique a pasta /downloads no servidor";
+      btn.classList.remove("doing");
+    }, 1200);
+  }
+
+  const orphans = document.querySelectorAll(".cfg-view + .btn-row");
+  document.getElementById("stat-dl").textContent = "3";
+  document.getElementById("stat-vis").textContent = "3";
+  document.getElementById("stat-cfg").textContent = "3+";
+</script>
+</body>
+</html>

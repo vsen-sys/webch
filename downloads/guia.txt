@@ -1,0 +1,17 @@
+NEXUS HUB - GUIA DE INSTALACAO
+===============================
+
+1) CONFIGS DE AIM
+   - Baixe o .cfg que quiser
+   - Coloque na pasta de configs do seu programa (ex: C:\Program Files (x86)\<nome>\configs\)
+   - Carregue pelo menu do programa
+
+2) VISUALS
+   - Os presets .cfg funcionam igual aos de aim
+   - Importe pelo menu de visuals
+
+3) PROBLEMAS COMUNS
+   - Arquivo nao carrega: veja se a versao do programa e compativel
+   - "Arquivo corrompido": baixe de novo pelo IP do servidor
+
+Duvidas? Fale com quem te passou o link do servidor.
