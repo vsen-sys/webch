@@ -114,6 +114,46 @@ function login(loginValue, senha) {
   return { ok: true, token, user };
 }
 
+function getUsuarioPorDiscordId(discordId) {
+  if (!discordId) return null;
+  const did = String(discordId);
+  return Object.values(db.usuarios).find(u => u.discordId === did) || null;
+}
+
+// Login via codigo do Discord: cria conta se nao existir e loga.
+// A conta fica vinculada pelo discordId (o codigo nunca vira senha).
+function loginComDiscord({ discordId, username }) {
+  const did = String(discordId || '').trim();
+  if (!did) return { ok: false, message: 'discordId ausente' };
+  const nome = String(username || 'membro').trim().slice(0, 32);
+
+  let user = getUsuarioPorDiscordId(did);
+  if (!user) {
+    const key = 'discord_' + did;
+    user = {
+      nome,
+      username: nome.toLowerCase().replace(/\s+/g, '_') + '_' + did.slice(0, 6),
+      email: key + '@webch.local',
+      discordId: did,
+      criadoEm: new Date().toISOString(),
+      verificado: true,
+      premium: false,
+      premiumAtivo: null
+    };
+    db.usuarios[key] = user;
+    save();
+    console.log(`[AUTH] Conta criada via Discord: ${nome} (${did})`);
+  } else if (user.nome !== nome) {
+    user.nome = nome;
+    save();
+  }
+
+  const token = genToken();
+  user.token = token;
+  save();
+  return { ok: true, token, user };
+}
+
 function getUserByToken(token) {
   if (!token) return null;
   const users = Object.values(db.usuarios);
@@ -146,8 +186,9 @@ function publicUser(user) {
     email: user.email,
     premium: user.premium,
     premiumAtivo: user.premiumAtivo,
-    criadoEm: user.criadoEm
+    criadoEm: user.criadoEm,
+    discord: !!(user.discordId)
   };
 }
 
-module.exports = { register, verify, resendCode, login, getUserByToken, setToken, activatePremium, publicUser };
+module.exports = { register, verify, resendCode, login, getUserByToken, setToken, activatePremium, publicUser, loginComDiscord };

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEBCH - VERIFICAR CODIGO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="verificar.css">
+</head>
+<body>
+    <div class="verificar-screen">
+        <div class="verificar-card">
+            <div class="brand">
+                <span class="brand-dot"></span>
+                <span class="brand-name">WEBCH</span>
+            </div>
+
+            <h1 class="title">VERIFICAR CODIGO</h1>
+            <p class="subtitle">Digite o codigo que voce gerou no Discord usando /gerar-codigo</p>
+
+            <div class="input-group">
+                <input type="text" id="codigoInput" placeholder="EX: A1B2C3D4" maxlength="8" autocomplete="off" autofocus>
+            </div>
+
+            <button class="verify-btn" id="verifyBtn">
+                <span class="btn-text">VERIFICAR CODIGO</span>
+                <span class="btn-loading" id="verifyLoading"><span class="spinner"></span></span>
+            </button>
+
+            <div class="result" id="result"></div>
+
+            <div class="footer-links">
+                <a href="https://discord.gg/aCEuEBw8V" target="_blank" rel="noopener">GERAR CODIGO NO DISCORD</a>
+                <a href="/">VOLTAR PARA O SITE</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="verificar.js"></script>
+</body>
+</html>

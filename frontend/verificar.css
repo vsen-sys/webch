@@ -1,0 +1,224 @@
+/* ====================================
+   WEBCH - VERIFICAR CODIGO (pagina do Discord)
+   Tema preto/branco consistente com o site
+   ==================================== */
+:root {
+    --black: #0a0a0a;
+    --panel: #141414;
+    --white: #ffffff;
+    --gray: #b0b0b0;
+    --danger: #ff4d4d;
+    --success: #4dff88;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-image:
+        radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+.verificar-screen {
+    width: 100%;
+    max-width: 460px;
+}
+
+.verificar-card {
+    background: var(--panel);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 42px 38px;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(255,255,255,0.06);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.brand-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--white);
+    transform: rotate(45deg);
+    box-shadow: 0 0 14px rgba(255,255,255,0.8);
+}
+
+.brand-name {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 8px;
+}
+
+.title {
+    font-size: 24px;
+    letter-spacing: 4px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: var(--gray);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.input-group {
+    margin-bottom: 22px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 18px 16px;
+    background: #0d0d0d;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 10px;
+    color: var(--white);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 22px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: var(--white);
+    box-shadow: 0 0 20px rgba(255,255,255,0.15);
+}
+
+.input-group input::placeholder {
+    color: #4a4a4a;
+    letter-spacing: 6px;
+    font-size: 16px;
+}
+
+.verify-btn {
+    width: 100%;
+    padding: 17px;
+    border: none;
+    border-radius: 10px;
+    background: var(--white);
+    color: var(--black);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    position: relative;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.verify-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255,255,255,0.25);
+}
+
+.verify-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.verify-btn .btn-loading { display: none; }
+.verify-btn.carregando .btn-loading {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.verify-btn.carregando .btn-text { visibility: hidden; }
+
+.spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-top-color: var(--black);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.result {
+    min-height: 52px;
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 15px;
+    letter-spacing: 0.8px;
+    line-height: 1.5;
+    display: none;
+}
+
+.result.sucesso {
+    display: flex;
+    background: rgba(77,255,136,0.08);
+    border: 1px solid rgba(77,255,136,0.35);
+    color: var(--success);
+}
+
+.result.erro {
+    display: flex;
+    background: rgba(255,77,77,0.08);
+    border: 1px solid rgba(255,77,77,0.35);
+    color: var(--danger);
+}
+
+.result .result-botao {
+    background: var(--white);
+    color: var(--black);
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.footer-links {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-links a {
+    color: var(--gray);
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover { color: var(--white); }
+
+@media (max-width: 480px) {
+    .verificar-card { padding: 32px 22px; }
+    .input-group input { letter-spacing: 5px; font-size: 18px; }
+}

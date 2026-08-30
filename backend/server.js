@@ -8,6 +8,9 @@ dotenv.config({ path: path.join(__dirname, '.env') });
 const auth = require('./auth');
 const mailer = require('./mailer');
 const pix = require('./pix');
+const discordCodes = require('./discord-codes-db');
+const { rateLimit } = require('./middlewares/rateLimit');
+const { assinarJwt } = require('./middlewares/jwt');
 
 const app = express();
 const PORT = 8080;
@@ -25,6 +28,8 @@ const cfg = {
   smtpPass: process.env.SMTP_PASS,
   smtpFrom: process.env.SMTP_FROM,
   adminKey: process.env.ADMIN_KEY,
+  jwtSecret: process.env.JWT_SECRET || 'webch_jwt_secret_padrao',
+  publicUrl: process.env.PUBLIC_URL || 'http://192.168.1.107:8080',
   pixKey: process.env.PIX_KEY,
   pixName: process.env.PIX_NOME,
   pixCity: process.env.PIX_CIDADE,
@@ -344,6 +349,82 @@ app.get('/api/auth/me', requireAuth, (req, res) => {
   res.json({ success: true, user: auth.publicUser(req.user) });
 });
 
+// ====================================
+// DISCORD - VERIFICACAO DE CODIGOS (OAuth2-like)
+// Fluxo: bot gera codigo unico (15 min) -> usuario usa em /verificar.html
+// ====================================
+
+// GET - Valida um codigo gerado pelo bot (nao consome o codigo)
+app.get('/api/verificar', rateLimit({ max: 5, janelaMs: 60 * 1000 }), (req, res) => {
+  const codigo = (req.query.codigo || '').toString().trim().toUpperCase();
+  if (!codigo) {
+    return res.status(400).json({ success: false, valido: false, erro: 'Informe o codigo. Ex: /api/verificar?codigo=ABCD1234' });
+  }
+
+  const resultado = discordCodes.consultarCodigo(codigo);
+
+  if (!resultado.ok) {
+    const mensagens = {
+      'nao-encontrado': 'Codigo invalido.',
+      'usado': 'Codigo ja utilizado.',
+      'expirado': 'Codigo expirado. Gere um novo no Discord.'
+    };
+    return res.status(400).json({ success: false, valido: false, erro: mensagens[resultado.motivo] || 'Codigo invalido.' });
+  }
+
+  res.json({
+    success: true,
+    valido: true,
+    userId: resultado.userId,
+    username: resultado.username,
+    expiraEm: resultado.expiresAt
+  });
+});
+
+// POST - Consome o codigo e faz login (cria a conta vinculada ao Discord se necessario)
+app.post('/api/login', rateLimit({ max: 5, janelaMs: 60 * 1000 }), (req, res) => {
+  const { codigo } = req.body || {};
+  const c = (codigo || '').toString().trim().toUpperCase();
+  if (!c) {
+    return res.status(400).json({ success: false, valido: false, erro: 'Informe o codigo gerado no Discord.' });
+  }
+
+  const resultado = discordCodes.consultarCodigo(c);
+  if (!resultado.ok) {
+    const mensagens = {
+      'nao-encontrado': 'Codigo invalido.',
+      'usado': 'Codigo ja utilizado. Gere um novo no Discord.',
+      'expirado': 'Codigo expirado. Gere um novo no Discord.'
+    };
+    return res.status(400).json({ success: false, valido: false, erro: mensagens[resultado.motivo] || 'Codigo invalido.' });
+  }
+
+  if (!discordCodes.marcarUsado(c)) {
+    return res.status(400).json({ success: false, valido: false, erro: 'Codigo ja utilizado. Gere um novo.' });
+  }
+
+  const login = auth.loginComDiscord({ discordId: resultado.userId, username: resultado.username });
+  if (!login.ok) {
+    return res.status(500).json({ success: false, valido: false, erro: login.message || 'Falha ao criar a conta.' });
+  }
+
+  const jwt = assinarJwt({ userId: resultado.userId, username: login.user.email }, cfg.jwtSecret, 7 * 24 * 3600);
+
+  res.json({
+    success: true,
+    valido: true,
+    token: login.token,
+    jwt,
+    user: auth.publicUser(login.user),
+    linkVerificar: cfg.publicUrl + '/verificar.html'
+  });
+});
+
+// GET - Lista codigos do proprio usuario (via JWT ou token da sessao)
+app.get('/api/meus-codigos', requireAuth, (req, res) => {
+  res.json({ success: true, codigos: discordCodes.listarCodigos(req.user.discordId || req.user.email) });
+});
+
 // POST - Ativar premium (manual, apos pagamento via PIX)
 app.post('/api/auth/premium', (req, res) => {
   const { email, chave } = req.body;
@@ -488,5 +569,13 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`[API] Pesquisa em http://0.0.0.0:${PORT}/api/offsets/search?q=offset`);
   console.log(`[API] Auth em http://0.0.0.0:${PORT}/api/auth`);
   console.log(`[API] Premium em http://0.0.0.0:${PORT}/api/premium/planos`);
+  console.log(`[API] Verificador de codigos Discord em http://0.0.0.0:${PORT}/api/verificar?codigo=XXXX`);
+  console.log(`[API] Login via codigo em http://0.0.0.0:${PORT}/api/login`);
   console.log(`[NET] Na rede local: http://${lanIP}:${PORT}`);
+  console.log(`[NET] Pagina de verificacao: http://${lanIP}:${PORT}/verificar.html`);
 });
+
+// Limpeza periodica de codigos expirados (a cada 5 minutos)
+setInterval(() => {
+  try { discordCodes.limparExpirados(); } catch (e) { /* sem impacto */ }
+}, 5 * 60 * 1000);
