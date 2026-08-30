@@ -3123,6 +3123,17 @@ body::before {
     gap: 20px;
     margin-bottom: 30px;
 }
+.plans-group { margin-bottom: 34px; }
+.plans-group-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #fff;
+}
 .plan-card {
     position: relative;
     border: 1px solid rgba(255,255,255,0.12);
@@ -3292,6 +3303,40 @@ body::before {
     background: #fff;
     color: #000;
     font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 3px;
+    vertical-align: middle;
+}
+
+.premium-locked-note {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 6px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+}
+.premium-locked-note .badge-premium {
+    display: inline-block;
+    padding: 2px 8px;
+    background: #fff;
+    color: #000;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 3px;
+    margin-right: 6px;
+}
+.offsets-table tr.premium-row .offset-nome .badge-premium {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 6px;
+    background: #fff;
+    color: #000;
+    font-size: 8px;
     font-weight: 700;
     letter-spacing: 1px;
     border-radius: 3px;

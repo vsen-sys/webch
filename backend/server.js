@@ -123,33 +123,76 @@ function requirePremium(req, res, next) {
   });
 }
 
+// Conjunto de offsets premium por jogo (nome -> offset excecao para filtragem)
+const premiumOffsetsPorJogo = {};
+(premiumData.offsetsPremium || []).forEach(o => {
+  if (!premiumOffsetsPorJogo[o.jogo]) premiumOffsetsPorJogo[o.jogo] = new Set();
+  premiumOffsetsPorJogo[o.jogo].add(o.nome);
+});
+
+function ehPremiumOffset(jogo, nome) {
+  const set = premiumOffsetsPorJogo[jogo];
+  return !!(set && set.has(nome));
+}
+
+function podeVerPremium(req) {
+  const token = bearerToken(req);
+  const user = auth.getUserByToken(token);
+  return !!(user && user.premium);
+}
+
+function filtrarPremium(entries, jogo, req) {
+  if (podeVerPremium(req)) return entries;
+  return entries.filter(entry => !ehPremiumOffset(jogo, entry.nome));
+}
+
 // Rotas da API
 
 // GET - Listar todas as offsets
 app.get('/api/offsets', (req, res) => {
+  const premium = podeVerPremium(req);
+  const data = { ...offsetsData };
+  if (!premium && offsetsData.offsets) {
+    data.offsets = Object.keys(offsetsData.offsets).reduce((acc, nome) => {
+      if (!ehPremiumOffset('CS2', nome)) acc[nome] = offsetsData.offsets[nome];
+      return acc;
+    }, {});
+  }
   res.json({
     success: true,
-    data: offsetsData
+    data: data
   });
 });
 
 // GET - Offsets do CS2 especificamente
 app.get('/api/offsets/cs2', (req, res) => {
+  const premium = podeVerPremium(req);
+  const data = { ...offsetsData };
+  if (!premium && offsetsData.offsets) {
+    data.offsets = Object.keys(offsetsData.offsets).reduce((acc, nome) => {
+      if (!ehPremiumOffset('CS2', nome)) acc[nome] = offsetsData.offsets[nome];
+      return acc;
+    }, {});
+  }
   res.json({
     success: true,
-    jogo: offsetsData.jogo,
-    versao: offsetsData.versao,
-    data: offsetsData.data_pesquisa,
-    offsets: offsetsData.offsets
+    jogo: data.jogo,
+    versao: data.versao,
+    data: data.data_pesquisa,
+    offsets: data.offsets
   });
 });
 
 // GET - Todos os jogos
 app.get('/api/offsets/todos', (req, res) => {
+  const dados = {};
+  for (const [jogo, entries] of Object.entries(allEntries())) {
+    dados[jogo] = filtrarPremium(entries, jogo, req);
+  }
   res.json({
     success: true,
     jogos: Object.keys(games),
-    dados: allEntries()
+    dados: dados
   });
 });
 
@@ -166,6 +209,7 @@ app.get('/api/offsets/search', (req, res) => {
   const resultados = [];
   for (const [game, entries] of Object.entries(allEntries())) {
     entries.forEach(entry => {
+      if (!podeVerPremium(req) && ehPremiumOffset(game, entry.nome)) return;
       const busca = entry.nome + ' ' + entry.valor;
       if (busca.toLowerCase().includes(q)) {
         resultados.push({ jogo: game, ...entry });
@@ -184,6 +228,9 @@ app.get('/api/offsets/search', (req, res) => {
 // GET - Offset especifica por nome
 app.get('/api/offsets/cs2/:nome', (req, res) => {
   const { nome } = req.params;
+  if (ehPremiumOffset('CS2', nome) && !podeVerPremium(req)) {
+    return res.status(403).json({ success: false, message: 'Offset exclusiva premium' });
+  }
   const offset = offsetsData.offsets[nome];
   
   if (offset) {

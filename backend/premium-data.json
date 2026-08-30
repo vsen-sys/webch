@@ -1,29 +1,159 @@
 {
   "planos": [
     {
-      "id": "mensal",
-      "nome": "PREMIUM MENSAL",
-      "valor": 19.90,
-      "periodo": "/ mes",
+      "id": "roblox-1dias",
+      "jogo": "ROBLOX",
+      "nome": "1 DIA",
+      "periodo": "1 dia",
+      "valor": 5,
       "beneficios": [
-        "Acesso a area Premium",
-        "Apps mais complexos (menu de cheats em jogo)",
-        "Offsets atualizadas constantemente",
-        "Offset exclusivas premium",
+        "App pronto para ROBLOX",
+        "Offsets de ESP e aimbot atualizadas",
+        "Acesso a area premium",
         "Suporte prioritario"
       ]
     },
     {
-      "id": "vitalicio",
-      "nome": "PREMIUM VITALICIO",
-      "valor": 49.90,
-      "periodo": "pagamento unico",
+      "id": "roblox-5dias",
+      "jogo": "ROBLOX",
+      "nome": "5 DIAS",
+      "periodo": "5 dias",
+      "valor": 15,
       "beneficios": [
-        "Tudo do plano mensal",
-        "Acesso vitalicio sem mensalidade",
-        "Todas as futuras atualizacoes incluidas",
-        "Acesso antecipado a apps novos",
-        "Suporte VIP direto"
+        "App pronto para ROBLOX",
+        "Offsets de ESP e aimbot atualizadas",
+        "Acesso a area premium",
+        "Suporte prioritario"
+      ]
+    },
+    {
+      "id": "roblox-15dias",
+      "jogo": "ROBLOX",
+      "nome": "15 DIAS",
+      "periodo": "15 dias",
+      "valor": 25,
+      "beneficios": [
+        "App pronto para ROBLOX",
+        "Offsets de ESP e aimbot atualizadas",
+        "Acesso a area premium",
+        "Suporte prioritario"
+      ]
+    },
+    {
+      "id": "roblox-30dias",
+      "jogo": "ROBLOX",
+      "nome": "1 MES",
+      "periodo": "1 mes",
+      "valor": 50,
+      "beneficios": [
+        "App pronto para ROBLOX",
+        "Offsets de ESP e aimbot atualizadas",
+        "Acesso a area premium",
+        "Suporte prioritario"
+      ]
+    },
+    {
+      "id": "cs2-1dias",
+      "jogo": "CS2",
+      "nome": "1 DIA",
+      "periodo": "1 dia",
+      "valor": 5,
+      "beneficios": [
+        "App pronto para CS2",
+        "Offsets de ESP e aimbot atualizadas",
+        "Acesso a area premium",
+        "Suporte prioritario"
+      ]
+    },
+    {
+      "id": "cs2-5dias",
+      "jogo": "CS2",
+      "nome": "5 DIAS",
+      "periodo": "5 dias",
+      "valor": 15,
+      "beneficios": [
+        "App pronto para CS2",
+        "Offsets de ESP e aimbot atualizadas",
+        "Acesso a area premium",
+        "Suporte prioritario"
+      ]
+    },
+    {
+      "id": "cs2-15dias",
+      "jogo": "CS2",
+      "nome": "15 DIAS",
+      "periodo": "15 dias",
+      "valor": 25,
+      "beneficios": [
+        "App pronto para CS2",
+        "Offsets de ESP e aimbot atualizadas",
+        "Acesso a area premium",
+        "Suporte prioritario"
+      ]
+    },
+    {
+      "id": "cs2-30dias",
+      "jogo": "CS2",
+      "nome": "1 MES",
+      "periodo": "1 mes",
+      "valor": 50,
+      "beneficios": [
+        "App pronto para CS2",
+        "Offsets de ESP e aimbot atualizadas",
+        "Acesso a area premium",
+        "Suporte prioritario"
+      ]
+    },
+    {
+      "id": "fortnite-1dias",
+      "jogo": "FORTNITE",
+      "nome": "1 DIA",
+      "periodo": "1 dia",
+      "valor": 5,
+      "beneficios": [
+        "App pronto para FORTNITE",
+        "Offsets de ESP e aimbot atualizadas",
+        "Acesso a area premium",
+        "Suporte prioritario"
+      ]
+    },
+    {
+      "id": "fortnite-5dias",
+      "jogo": "FORTNITE",
+      "nome": "5 DIAS",
+      "periodo": "5 dias",
+      "valor": 15,
+      "beneficios": [
+        "App pronto para FORTNITE",
+        "Offsets de ESP e aimbot atualizadas",
+        "Acesso a area premium",
+        "Suporte prioritario"
+      ]
+    },
+    {
+      "id": "fortnite-15dias",
+      "jogo": "FORTNITE",
+      "nome": "15 DIAS",
+      "periodo": "15 dias",
+      "valor": 25,
+      "beneficios": [
+        "App pronto para FORTNITE",
+        "Offsets de ESP e aimbot atualizadas",
+        "Acesso a area premium",
+        "Suporte prioritario"
+      ]
+    },
+    {
+      "id": "fortnite-30dias",
+      "jogo": "FORTNITE",
+      "nome": "1 MES",
+      "periodo": "1 mes",
+      "valor": 50,
+      "beneficios": [
+        "App pronto para FORTNITE",
+        "Offsets de ESP e aimbot atualizadas",
+        "Acesso a area premium",
+        "Suporte prioritario"
       ]
     }
   ],
@@ -32,7 +162,7 @@
       "id": "nexus-menu",
       "nome": "NEXUS MENU",
       "versao": "v3.2",
-      "descricao": "Menu de cheats em jogo com ESP, aim assist e visuais. Requer premium.",
+      "descricao": "Menu completo de cheats em jogo com ESP, aim assist e visuais.",
       "complexidade": "AVANCADO",
       "arquivo": "nexus-menu.zip"
     },
@@ -62,13 +192,525 @@
     }
   ],
   "offsetsPremium": [
-    { "jogo": "CS2", "nome": "m_pGameSceneNode", "valor": "0x2D8", "categoria": "premium", "descricao": "Acesso a visuais avancados (skinchanger, animacoes)" },
-    { "jogo": "CS2", "nome": "m_aimPunchCache", "valor": "0x1D6C", "categoria": "premium", "descricao": "Controle de recoil / no-recoil" },
-    { "jogo": "CS2", "nome": "AnimScriptHandle", "valor": "0x1E58", "categoria": "premium", "descricao": "Manipulacao de animacoes" },
-    { "jogo": "FORTNITE", "nome": "FortValidWeaponDef", "valor": "0x958", "categoria": "premium", "descricao": "Validacao de armas" },
-    { "jogo": "ROBLOX", "nome": "RemoteEvent.Caching", "valor": "0x4A8", "categoria": "premium", "descricao": "Controle avancado de remotes" },
-    { "jogo": "ROBLOX", "nome": "Humanoid.AutoRotate", "valor": "0x2E4", "categoria": "premium", "descricao": "Rotacao automatica avancada" }
+    {
+      "jogo": "CS2",
+      "nome": "dwGlowManager",
+      "valor": "0x23A1708",
+      "categoria": "misc",
+      "descricao": "Gerenciador de Glow"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "dwLocalPlayerController",
+      "valor": "0x237FB70",
+      "categoria": "jogador",
+      "descricao": "Controlador do Jogador Local"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "dwLocalPlayerPawn",
+      "valor": "0x23A5238",
+      "categoria": "jogador",
+      "descricao": "Jogador Local (Pawn)"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "dwPrediction",
+      "valor": "0x23A5140",
+      "categoria": "jogo",
+      "descricao": "Sistema de Predicao"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "dwSensitivity",
+      "valor": "0x23A2228",
+      "categoria": "misc",
+      "descricao": "Sensibilidade do Mouse"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "dwSensitivity_sensitivity",
+      "valor": "0x58",
+      "categoria": "misc",
+      "descricao": "Valor de Sensibilidade"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "dwViewAngles",
+      "valor": "0x23BAE18",
+      "categoria": "camera",
+      "descricao": "Angulos de Visao"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "dwViewMatrix",
+      "valor": "0x23AA340",
+      "categoria": "camera",
+      "descricao": "Matriz de Visao (Camera)"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_iHealth",
+      "valor": "0x34C",
+      "categoria": "jogador",
+      "descricao": "Vida do Jogador"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_iTeamNum",
+      "valor": "0x3E7",
+      "categoria": "jogador",
+      "descricao": "Numero do Time"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_fFlags",
+      "valor": "0x3F4",
+      "categoria": "jogador",
+      "descricao": "Flags do Jogador"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_iMaxHealth",
+      "valor": "0x348",
+      "categoria": "jogador",
+      "descricao": "Vida Maxima"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_bDormant",
+      "valor": "0x103",
+      "categoria": "jogador",
+      "descricao": "Jogador Dormant (Oculto)"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_vecOrigin",
+      "valor": "0x80",
+      "categoria": "jogador",
+      "descricao": "Posicao do Corpo"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_angRotation",
+      "valor": "0xB8",
+      "categoria": "jogador",
+      "descricao": "Rotacao"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_flScale",
+      "valor": "0xC4",
+      "categoria": "jogador",
+      "descricao": "Escala"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_vecAbsOrigin",
+      "valor": "0xC8",
+      "categoria": "jogador",
+      "descricao": "Posicao Absoluta"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_pGameSceneNode",
+      "valor": "0x8",
+      "categoria": "jogador",
+      "descricao": "Nodo da Cena"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_CBodyComponent",
+      "valor": "0x50",
+      "categoria": "jogador",
+      "descricao": "Componente do Corpo"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_angEyeAngles",
+      "valor": "0x170",
+      "categoria": "jogador",
+      "descricao": "Angulos dos Olhos"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_vecVelocity",
+      "valor": "0x120",
+      "categoria": "jogador",
+      "descricao": "Velocidade"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_iShotsFired",
+      "valor": "0x39B8",
+      "categoria": "misc",
+      "descricao": "Tiros Disparados"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_iItemDefinitionIndex",
+      "valor": "0x1BA",
+      "categoria": "arma",
+      "descricao": "Definicao da Arma"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_flNextPrimaryAttack",
+      "valor": "0x3238",
+      "categoria": "arma",
+      "descricao": "Proximo Ataque Primario"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_iClip1",
+      "valor": "0x3264",
+      "categoria": "arma",
+      "descricao": "Municao do Carregador"
+    },
+    {
+      "jogo": "CS2",
+      "nome": "m_hActiveWeapon",
+      "valor": "0x32F8",
+      "categoria": "arma",
+      "descricao": "Arma Ativa"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "PlayerController",
+      "valor": "0x30",
+      "categoria": "jogador",
+      "descricao": "Controlador do Jogador"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "AcknowledgedPawn",
+      "valor": "0x358",
+      "categoria": "jogador",
+      "descricao": "Pawn Reconhecido"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "TeamIndex",
+      "valor": "0x11B1",
+      "categoria": "jogador",
+      "descricao": "Indice do Time"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "bIsDying",
+      "valor": "0x728",
+      "categoria": "jogador",
+      "descricao": "Esta Morrendo"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "bIsDBNO",
+      "valor": "0x841",
+      "categoria": "jogador",
+      "descricao": "Esta Derrubado"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "bIsABot",
+      "valor": "0x2BA",
+      "categoria": "jogador",
+      "descricao": "Eh um Bot"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "TargetedFortPawn",
+      "valor": "0x1830",
+      "categoria": "jogador",
+      "descricao": "Alvo no Raio de Mira"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "PlayerName",
+      "valor": "0xA08",
+      "categoria": "jogador",
+      "descricao": "Nome do Jogador"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "PlayerNamePrivate",
+      "valor": "0x348",
+      "categoria": "jogador",
+      "descricao": "Nome Privado"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "PlayerAimOffset",
+      "valor": "0x2BD0",
+      "categoria": "jogador",
+      "descricao": "Compensacao de Mira"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "PlayerArray",
+      "valor": "0x2C8",
+      "categoria": "jogador",
+      "descricao": "Lista de Jogadores"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "RootComponent",
+      "valor": "0x1B0",
+      "categoria": "jogador",
+      "descricao": "Componente Raiz"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "Mesh",
+      "valor": "0x330",
+      "categoria": "jogador",
+      "descricao": "Malha (Skeletal)"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "BoneArray",
+      "valor": "0x5F0",
+      "categoria": "jogador",
+      "descricao": "Lista de Ossos"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "BoneCache",
+      "valor": "0x5F8",
+      "categoria": "jogador",
+      "descricao": "Cache de Ossos"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "MeshDeformerInstances",
+      "valor": "0x5C0",
+      "categoria": "jogador",
+      "descricao": "Instancias de Malha"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "ComponentToWorld",
+      "valor": "0x1E0",
+      "categoria": "jogador",
+      "descricao": "Transformada"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "RelativeLocation",
+      "valor": "0x140",
+      "categoria": "jogador",
+      "descricao": "Posicao Relativa"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "RelativeRotation",
+      "valor": "0x158",
+      "categoria": "jogador",
+      "descricao": "Rotacao Relativa"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "RelativeScale3D",
+      "valor": "0x170",
+      "categoria": "jogador",
+      "descricao": "Escala 3D"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "ComponentVelocity",
+      "valor": "0x188",
+      "categoria": "jogador",
+      "descricao": "Velocidade"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "AdditionalAimOffset",
+      "valor": "0x2BA0",
+      "categoria": "jogador",
+      "descricao": "Mira Adicional"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "LastRenderTime",
+      "valor": "0x328",
+      "categoria": "camera",
+      "descricao": "Ultima Renderizacao"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "LocationUnderReticle",
+      "valor": "0x2A50",
+      "categoria": "camera",
+      "descricao": "Posicao no Alvo"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "CameraLocation",
+      "valor": "0x178",
+      "categoria": "camera",
+      "descricao": "Posicao da Camera"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "CameraRotation",
+      "valor": "0x188",
+      "categoria": "camera",
+      "descricao": "Rotacao da Camera"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "CameraFOV",
+      "valor": "0x3B4",
+      "categoria": "camera",
+      "descricao": "Campo de Visao"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "CurrentWeapon",
+      "valor": "0x990",
+      "categoria": "arma",
+      "descricao": "Arma Atual"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "WeaponData",
+      "valor": "0x688",
+      "categoria": "arma",
+      "descricao": "Dados da Arma"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "AmmoCount",
+      "valor": "0x11CC",
+      "categoria": "arma",
+      "descricao": "Quantidade de Municao"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "ProjectileSpeed",
+      "valor": "0x29DC",
+      "categoria": "arma",
+      "descricao": "Velocidade do Projetil"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "ProjectileGravity",
+      "valor": "0x29E0",
+      "categoria": "arma",
+      "descricao": "Gravidade do Projetil"
+    },
+    {
+      "jogo": "FORTNITE",
+      "nome": "MaxTargetingAimAdjustPerSecond",
+      "valor": "0x23D0",
+      "categoria": "arma",
+      "descricao": "Limite de Mira"
+    },
+    {
+      "jogo": "ROBLOX",
+      "nome": "VisualEngine.ViewMatrix",
+      "valor": "0x180",
+      "categoria": "camera",
+      "descricao": "Motor Visual - ViewMatrix"
+    },
+    {
+      "jogo": "ROBLOX",
+      "nome": "VisualEngine.RenderView",
+      "valor": "0xC00",
+      "categoria": "camera",
+      "descricao": "Motor Visual - RenderView"
+    },
+    {
+      "jogo": "ROBLOX",
+      "nome": "VisualEngine.FakeDataModel",
+      "valor": "0xAC0",
+      "categoria": "camera",
+      "descricao": "Motor Visual - FakeDataModel"
+    },
+    {
+      "jogo": "ROBLOX",
+      "nome": "FakeDataModel",
+      "valor": "0x8CA9CC8",
+      "categoria": "camera",
+      "descricao": "DataModel Falso"
+    },
+    {
+      "jogo": "ROBLOX",
+      "nome": "FakeDataModel.RealDataModel",
+      "valor": "0x1F8",
+      "categoria": "camera",
+      "descricao": "DataModel Falso - RealDataModel"
+    },
+    {
+      "jogo": "ROBLOX",
+      "nome": "MouseService.InputObject",
+      "valor": "0xF0",
+      "categoria": "jogador",
+      "descricao": "Servico do Mouse - InputObject"
+    },
+    {
+      "jogo": "ROBLOX",
+      "nome": "MouseService.InputObject2",
+      "valor": "0x100",
+      "categoria": "jogador",
+      "descricao": "Servico do Mouse - InputObject2"
+    },
+    {
+      "jogo": "ROBLOX",
+      "nome": "MouseService.MousePosition",
+      "valor": "0xD4",
+      "categoria": "jogador",
+      "descricao": "Servico do Mouse - MousePosition"
+    },
+    {
+      "jogo": "ROBLOX",
+      "nome": "DataModel.ToRenderView1",
+      "valor": "0x1C8",
+      "categoria": "mundo",
+      "descricao": "Modelo de Dados - ToRenderView1"
+    },
+    {
+      "jogo": "ROBLOX",
+      "nome": "DataModel.ToRenderView2",
+      "valor": "0x8",
+      "categoria": "mundo",
+      "descricao": "Modelo de Dados - ToRenderView2"
+    },
+    {
+      "jogo": "ROBLOX",
+      "nome": "DataModel.ToRenderView3",
+      "valor": "0x28",
+      "categoria": "mundo",
+      "descricao": "Modelo de Dados - ToRenderView3"
+    },
+    {
+      "jogo": "ROBLOX",
+      "nome": "RenderJob.RenderView",
+      "valor": "0x1D8",
+      "categoria": "camera",
+      "descricao": "Trabalho de Render - RenderView"
+    },
+    {
+      "jogo": "ROBLOX",
+      "nome": "RenderJob.FakeDataModel",
+      "valor": "0x38",
+      "categoria": "camera",
+      "descricao": "Trabalho de Render - FakeDataModel"
+    },
+    {
+      "jogo": "ROBLOX",
+      "nome": "RenderJob.RealDataModel",
+      "valor": "0x1F0",
+      "categoria": "camera",
+      "descricao": "Trabalho de Render - RealDataModel"
+    },
+    {
+      "jogo": "ROBLOX",
+      "nome": "Workspace.CurrentCamera",
+      "valor": "0x498",
+      "categoria": "mundo",
+      "descricao": "Espaco de Trabalho - CurrentCamera"
+    }
   ],
   "atualizadoEm": "2026-08-29T00:00:00.000Z",
-  "nota": "Conteudo premium atualizado constantemente com offsets e apps novos."
+  "nota": "Escolha o jogo e a duracao. Conteudo premium com apps prontos e offsets de ESP/aimbot atualizadas constantemente."
 }

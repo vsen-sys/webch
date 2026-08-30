@@ -51,19 +51,22 @@ window.OFFSETS_DATA = {
     "nome": "dwGlowManager",
     "valor": "0x23A1708",
     "categoria": "misc",
-    "descricao": "Gerenciador de Glow"
+    "descricao": "Gerenciador de Glow",
+    "premium": true
    },
    {
     "nome": "dwLocalPlayerController",
     "valor": "0x237FB70",
     "categoria": "jogador",
-    "descricao": "Controlador do Jogador Local"
+    "descricao": "Controlador do Jogador Local",
+    "premium": true
    },
    {
     "nome": "dwLocalPlayerPawn",
     "valor": "0x23A5238",
     "categoria": "jogador",
-    "descricao": "Jogador Local (Pawn)"
+    "descricao": "Jogador Local (Pawn)",
+    "premium": true
    },
    {
     "nome": "dwPlantedC4",
@@ -75,31 +78,36 @@ window.OFFSETS_DATA = {
     "nome": "dwPrediction",
     "valor": "0x23A5140",
     "categoria": "jogo",
-    "descricao": "Sistema de Predicao"
+    "descricao": "Sistema de Predicao",
+    "premium": true
    },
    {
     "nome": "dwSensitivity",
     "valor": "0x23A2228",
     "categoria": "misc",
-    "descricao": "Sensibilidade do Mouse"
+    "descricao": "Sensibilidade do Mouse",
+    "premium": true
    },
    {
     "nome": "dwSensitivity_sensitivity",
     "valor": "0x58",
     "categoria": "misc",
-    "descricao": "Valor de Sensibilidade"
+    "descricao": "Valor de Sensibilidade",
+    "premium": true
    },
    {
     "nome": "dwViewAngles",
     "valor": "0x23BAE18",
     "categoria": "camera",
-    "descricao": "Angulos de Visao"
+    "descricao": "Angulos de Visao",
+    "premium": true
    },
    {
     "nome": "dwViewMatrix",
     "valor": "0x23AA340",
     "categoria": "camera",
-    "descricao": "Matriz de Visao (Camera)"
+    "descricao": "Matriz de Visao (Camera)",
+    "premium": true
    },
    {
     "nome": "dwViewRender",
@@ -207,109 +215,127 @@ window.OFFSETS_DATA = {
     "nome": "m_iHealth",
     "valor": "0x34C",
     "categoria": "jogador",
-    "descricao": "Vida do Jogador"
+    "descricao": "Vida do Jogador",
+    "premium": true
    },
    {
     "nome": "m_iTeamNum",
     "valor": "0x3E7",
     "categoria": "jogador",
-    "descricao": "Numero do Time"
+    "descricao": "Numero do Time",
+    "premium": true
    },
    {
     "nome": "m_fFlags",
     "valor": "0x3F4",
     "categoria": "jogador",
-    "descricao": "Flags do Jogador"
+    "descricao": "Flags do Jogador",
+    "premium": true
    },
    {
     "nome": "m_iMaxHealth",
     "valor": "0x348",
     "categoria": "jogador",
-    "descricao": "Vida Maxima"
+    "descricao": "Vida Maxima",
+    "premium": true
    },
    {
     "nome": "m_bDormant",
     "valor": "0x103",
     "categoria": "jogador",
-    "descricao": "Jogador Dormant (Oculto)"
+    "descricao": "Jogador Dormant (Oculto)",
+    "premium": true
    },
    {
     "nome": "m_vecOrigin",
     "valor": "0x80",
     "categoria": "jogador",
-    "descricao": "Posicao do Corpo"
+    "descricao": "Posicao do Corpo",
+    "premium": true
    },
    {
     "nome": "m_angRotation",
     "valor": "0xB8",
     "categoria": "jogador",
-    "descricao": "Rotacao"
+    "descricao": "Rotacao",
+    "premium": true
    },
    {
     "nome": "m_flScale",
     "valor": "0xC4",
     "categoria": "jogador",
-    "descricao": "Escala"
+    "descricao": "Escala",
+    "premium": true
    },
    {
     "nome": "m_vecAbsOrigin",
     "valor": "0xC8",
     "categoria": "jogador",
-    "descricao": "Posicao Absoluta"
+    "descricao": "Posicao Absoluta",
+    "premium": true
    },
    {
     "nome": "m_pGameSceneNode",
     "valor": "0x8",
     "categoria": "jogador",
-    "descricao": "Nodo da Cena"
+    "descricao": "Nodo da Cena",
+    "premium": true
    },
    {
     "nome": "m_CBodyComponent",
     "valor": "0x50",
     "categoria": "jogador",
-    "descricao": "Componente do Corpo"
+    "descricao": "Componente do Corpo",
+    "premium": true
    },
    {
     "nome": "m_angEyeAngles",
     "valor": "0x170",
     "categoria": "jogador",
-    "descricao": "Angulos dos Olhos"
+    "descricao": "Angulos dos Olhos",
+    "premium": true
    },
    {
     "nome": "m_vecVelocity",
     "valor": "0x120",
     "categoria": "jogador",
-    "descricao": "Velocidade"
+    "descricao": "Velocidade",
+    "premium": true
    },
    {
     "nome": "m_iShotsFired",
     "valor": "0x39B8",
     "categoria": "misc",
-    "descricao": "Tiros Disparados"
+    "descricao": "Tiros Disparados",
+    "premium": true
    },
    {
     "nome": "m_iItemDefinitionIndex",
     "valor": "0x1BA",
     "categoria": "arma",
-    "descricao": "Definicao da Arma"
+    "descricao": "Definicao da Arma",
+    "premium": true
    },
    {
     "nome": "m_flNextPrimaryAttack",
     "valor": "0x3238",
     "categoria": "arma",
-    "descricao": "Proximo Ataque Primario"
+    "descricao": "Proximo Ataque Primario",
+    "premium": true
    },
    {
     "nome": "m_iClip1",
     "valor": "0x3264",
     "categoria": "arma",
-    "descricao": "Municao do Carregador"
+    "descricao": "Municao do Carregador",
+    "premium": true
    },
    {
     "nome": "m_hActiveWeapon",
     "valor": "0x32F8",
     "categoria": "arma",
-    "descricao": "Arma Ativa"
+    "descricao": "Arma Ativa",
+    "premium": true
    }
   ]
  },
@@ -364,7 +390,8 @@ window.OFFSETS_DATA = {
     "nome": "PlayerController",
     "valor": "0x30",
     "categoria": "jogador",
-    "descricao": "Controlador do Jogador"
+    "descricao": "Controlador do Jogador",
+    "premium": true
    },
    {
     "nome": "PlayerCameraManager",
@@ -376,7 +403,8 @@ window.OFFSETS_DATA = {
     "nome": "AcknowledgedPawn",
     "valor": "0x358",
     "categoria": "jogador",
-    "descricao": "Pawn Reconhecido"
+    "descricao": "Pawn Reconhecido",
+    "premium": true
    },
    {
     "nome": "PlayerState",
@@ -388,25 +416,29 @@ window.OFFSETS_DATA = {
     "nome": "TeamIndex",
     "valor": "0x11B1",
     "categoria": "jogador",
-    "descricao": "Indice do Time"
+    "descricao": "Indice do Time",
+    "premium": true
    },
    {
     "nome": "bIsDying",
     "valor": "0x728",
     "categoria": "jogador",
-    "descricao": "Esta Morrendo"
+    "descricao": "Esta Morrendo",
+    "premium": true
    },
    {
     "nome": "bIsDBNO",
     "valor": "0x841",
     "categoria": "jogador",
-    "descricao": "Esta Derrubado"
+    "descricao": "Esta Derrubado",
+    "premium": true
    },
    {
     "nome": "bIsABot",
     "valor": "0x2BA",
     "categoria": "jogador",
-    "descricao": "Eh um Bot"
+    "descricao": "Eh um Bot",
+    "premium": true
    },
    {
     "nome": "WeaponOffsetCorrection",
@@ -424,7 +456,8 @@ window.OFFSETS_DATA = {
     "nome": "TargetedFortPawn",
     "valor": "0x1830",
     "categoria": "jogador",
-    "descricao": "Alvo no Raio de Mira"
+    "descricao": "Alvo no Raio de Mira",
+    "premium": true
    },
    {
     "nome": "KillScore",
@@ -442,13 +475,15 @@ window.OFFSETS_DATA = {
     "nome": "PlayerName",
     "valor": "0xA08",
     "categoria": "jogador",
-    "descricao": "Nome do Jogador"
+    "descricao": "Nome do Jogador",
+    "premium": true
    },
    {
     "nome": "PlayerNamePrivate",
     "valor": "0x348",
     "categoria": "jogador",
-    "descricao": "Nome Privado"
+    "descricao": "Nome Privado",
+    "premium": true
    },
    {
     "nome": "RankedProgress",
@@ -460,7 +495,8 @@ window.OFFSETS_DATA = {
     "nome": "PlayerAimOffset",
     "valor": "0x2BD0",
     "categoria": "jogador",
-    "descricao": "Compensacao de Mira"
+    "descricao": "Compensacao de Mira",
+    "premium": true
    },
    {
     "nome": "OwningGameInstance",
@@ -478,7 +514,8 @@ window.OFFSETS_DATA = {
     "nome": "PlayerArray",
     "valor": "0x2C8",
     "categoria": "jogador",
-    "descricao": "Lista de Jogadores"
+    "descricao": "Lista de Jogadores",
+    "premium": true
    },
    {
     "nome": "WorldSettings",
@@ -508,7 +545,8 @@ window.OFFSETS_DATA = {
     "nome": "RootComponent",
     "valor": "0x1B0",
     "categoria": "jogador",
-    "descricao": "Componente Raiz"
+    "descricao": "Componente Raiz",
+    "premium": true
    },
    {
     "nome": "MoveIgnoreActors",
@@ -556,91 +594,106 @@ window.OFFSETS_DATA = {
     "nome": "Mesh",
     "valor": "0x330",
     "categoria": "jogador",
-    "descricao": "Malha (Skeletal)"
+    "descricao": "Malha (Skeletal)",
+    "premium": true
    },
    {
     "nome": "BoneArray",
     "valor": "0x5F0",
     "categoria": "jogador",
-    "descricao": "Lista de Ossos"
+    "descricao": "Lista de Ossos",
+    "premium": true
    },
    {
     "nome": "BoneCache",
     "valor": "0x5F8",
     "categoria": "jogador",
-    "descricao": "Cache de Ossos"
+    "descricao": "Cache de Ossos",
+    "premium": true
    },
    {
     "nome": "MeshDeformerInstances",
     "valor": "0x5C0",
     "categoria": "jogador",
-    "descricao": "Instancias de Malha"
+    "descricao": "Instancias de Malha",
+    "premium": true
    },
    {
     "nome": "ComponentToWorld",
     "valor": "0x1E0",
     "categoria": "jogador",
-    "descricao": "Transformada"
+    "descricao": "Transformada",
+    "premium": true
    },
    {
     "nome": "RelativeLocation",
     "valor": "0x140",
     "categoria": "jogador",
-    "descricao": "Posicao Relativa"
+    "descricao": "Posicao Relativa",
+    "premium": true
    },
    {
     "nome": "RelativeRotation",
     "valor": "0x158",
     "categoria": "jogador",
-    "descricao": "Rotacao Relativa"
+    "descricao": "Rotacao Relativa",
+    "premium": true
    },
    {
     "nome": "RelativeScale3D",
     "valor": "0x170",
     "categoria": "jogador",
-    "descricao": "Escala 3D"
+    "descricao": "Escala 3D",
+    "premium": true
    },
    {
     "nome": "ComponentVelocity",
     "valor": "0x188",
     "categoria": "jogador",
-    "descricao": "Velocidade"
+    "descricao": "Velocidade",
+    "premium": true
    },
    {
     "nome": "AdditionalAimOffset",
     "valor": "0x2BA0",
     "categoria": "jogador",
-    "descricao": "Mira Adicional"
+    "descricao": "Mira Adicional",
+    "premium": true
    },
    {
     "nome": "LastRenderTime",
     "valor": "0x328",
     "categoria": "camera",
-    "descricao": "Ultima Renderizacao"
+    "descricao": "Ultima Renderizacao",
+    "premium": true
    },
    {
     "nome": "LocationUnderReticle",
     "valor": "0x2A50",
     "categoria": "camera",
-    "descricao": "Posicao no Alvo"
+    "descricao": "Posicao no Alvo",
+    "premium": true
    },
    {
     "nome": "CameraLocation",
     "valor": "0x178",
     "categoria": "camera",
-    "descricao": "Posicao da Camera"
+    "descricao": "Posicao da Camera",
+    "premium": true
    },
    {
     "nome": "CameraRotation",
     "valor": "0x188",
     "categoria": "camera",
-    "descricao": "Rotacao da Camera"
+    "descricao": "Rotacao da Camera",
+    "premium": true
    },
    {
     "nome": "CameraFOV",
     "valor": "0x3B4",
     "categoria": "camera",
-    "descricao": "Campo de Visao"
+    "descricao": "Campo de Visao",
+    "premium": true
    },
    {
     "nome": "CurrentVehicle",
@@ -652,19 +705,22 @@ window.OFFSETS_DATA = {
     "nome": "CurrentWeapon",
     "valor": "0x990",
     "categoria": "arma",
-    "descricao": "Arma Atual"
+    "descricao": "Arma Atual",
+    "premium": true
    },
    {
     "nome": "WeaponData",
     "valor": "0x688",
     "categoria": "arma",
-    "descricao": "Dados da Arma"
+    "descricao": "Dados da Arma",
+    "premium": true
    },
    {
     "nome": "AmmoCount",
     "valor": "0x11CC",
     "categoria": "arma",
-    "descricao": "Quantidade de Municao"
+    "descricao": "Quantidade de Municao",
+    "premium": true
    },
    {
     "nome": "ReloadAnimation",
@@ -682,19 +738,22 @@ window.OFFSETS_DATA = {
     "nome": "ProjectileSpeed",
     "valor": "0x29DC",
     "categoria": "arma",
-    "descricao": "Velocidade do Projetil"
+    "descricao": "Velocidade do Projetil",
+    "premium": true
    },
    {
     "nome": "ProjectileGravity",
     "valor": "0x29E0",
     "categoria": "arma",
-    "descricao": "Gravidade do Projetil"
+    "descricao": "Gravidade do Projetil",
+    "premium": true
    },
    {
     "nome": "MaxTargetingAimAdjustPerSecond",
     "valor": "0x23D0",
     "categoria": "arma",
-    "descricao": "Limite de Mira"
+    "descricao": "Limite de Mira",
+    "premium": true
    },
    {
     "nome": "ServerWorldTimeSecondsDelta",
@@ -815,49 +874,57 @@ window.OFFSETS_DATA = {
     "nome": "VisualEngine.ViewMatrix",
     "valor": "0x180",
     "categoria": "camera",
-    "descricao": "Motor Visual - ViewMatrix"
+    "descricao": "Motor Visual - ViewMatrix",
+    "premium": true
    },
    {
     "nome": "VisualEngine.RenderView",
     "valor": "0xC00",
     "categoria": "camera",
-    "descricao": "Motor Visual - RenderView"
+    "descricao": "Motor Visual - RenderView",
+    "premium": true
    },
    {
     "nome": "VisualEngine.FakeDataModel",
     "valor": "0xAC0",
     "categoria": "camera",
-    "descricao": "Motor Visual - FakeDataModel"
+    "descricao": "Motor Visual - FakeDataModel",
+    "premium": true
    },
    {
     "nome": "FakeDataModel",
     "valor": "0x8CA9CC8",
     "categoria": "camera",
-    "descricao": "DataModel Falso"
+    "descricao": "DataModel Falso",
+    "premium": true
    },
    {
     "nome": "FakeDataModel.RealDataModel",
     "valor": "0x1F8",
     "categoria": "camera",
-    "descricao": "DataModel Falso - RealDataModel"
+    "descricao": "DataModel Falso - RealDataModel",
+    "premium": true
    },
    {
     "nome": "MouseService.InputObject",
     "valor": "0xF0",
     "categoria": "jogador",
-    "descricao": "Servico do Mouse - InputObject"
+    "descricao": "Servico do Mouse - InputObject",
+    "premium": true
    },
    {
     "nome": "MouseService.InputObject2",
     "valor": "0x100",
     "categoria": "jogador",
-    "descricao": "Servico do Mouse - InputObject2"
+    "descricao": "Servico do Mouse - InputObject2",
+    "premium": true
    },
    {
     "nome": "MouseService.MousePosition",
     "valor": "0xD4",
     "categoria": "jogador",
-    "descricao": "Servico do Mouse - MousePosition"
+    "descricao": "Servico do Mouse - MousePosition",
+    "premium": true
    },
    {
     "nome": "ModuleScript.GUID",
@@ -1079,19 +1146,22 @@ window.OFFSETS_DATA = {
     "nome": "DataModel.ToRenderView1",
     "valor": "0x1C8",
     "categoria": "mundo",
-    "descricao": "Modelo de Dados - ToRenderView1"
+    "descricao": "Modelo de Dados - ToRenderView1",
+    "premium": true
    },
    {
     "nome": "DataModel.ToRenderView2",
     "valor": "0x8",
     "categoria": "mundo",
-    "descricao": "Modelo de Dados - ToRenderView2"
+    "descricao": "Modelo de Dados - ToRenderView2",
+    "premium": true
    },
    {
     "nome": "DataModel.ToRenderView3",
     "valor": "0x28",
     "categoria": "mundo",
-    "descricao": "Modelo de Dados - ToRenderView3"
+    "descricao": "Modelo de Dados - ToRenderView3",
+    "premium": true
    },
    {
     "nome": "DataModel.PrimitiveCount",
@@ -1115,19 +1185,22 @@ window.OFFSETS_DATA = {
     "nome": "RenderJob.RenderView",
     "valor": "0x1D8",
     "categoria": "camera",
-    "descricao": "Trabalho de Render - RenderView"
+    "descricao": "Trabalho de Render - RenderView",
+    "premium": true
    },
    {
     "nome": "RenderJob.FakeDataModel",
     "valor": "0x38",
     "categoria": "camera",
-    "descricao": "Trabalho de Render - FakeDataModel"
+    "descricao": "Trabalho de Render - FakeDataModel",
+    "premium": true
    },
    {
     "nome": "RenderJob.RealDataModel",
     "valor": "0x1F0",
     "categoria": "camera",
-    "descricao": "Trabalho de Render - RealDataModel"
+    "descricao": "Trabalho de Render - RealDataModel",
+    "premium": true
    },
    {
     "nome": "Workspace.World",
@@ -1151,7 +1224,8 @@ window.OFFSETS_DATA = {
     "nome": "Workspace.CurrentCamera",
     "valor": "0x498",
     "categoria": "mundo",
-    "descricao": "Espaco de Trabalho - CurrentCamera"
+    "descricao": "Espaco de Trabalho - CurrentCamera",
+    "premium": true
    },
    {
     "nome": "World.Gravity",

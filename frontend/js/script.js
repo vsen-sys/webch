@@ -409,6 +409,9 @@ function showMainApp() {
     setupEventListeners();
     loadOffsets();
     loadApps();
+    if (currentUser) {
+        loadPremiumState();
+    }
 }
 
 // ====================================
@@ -509,7 +512,7 @@ function buildApiIndex() {
     apiIndex = [];
     for (const [game, info] of Object.entries(OFFSETS)) {
         (info.offsets || []).forEach(o => {
-            apiIndex.push({ game: game, nome: o.nome, valor: o.valor, categoria: o.categoria, descricao: o.descricao });
+            apiIndex.push({ game: game, nome: o.nome, valor: o.valor, categoria: o.categoria, descricao: o.descricao, premium: o.premium });
         });
     }
 }
@@ -535,7 +538,8 @@ async function handleSearch() {
                     nome: r.nome,
                     valor: r.valor,
                     categoria: emb?.categoria || 'misc',
-                    descricao: emb?.descricao || r.nome
+                    descricao: emb?.descricao || r.nome,
+                    premium: !!(emb && emb.premium)
                 };
             });
             renderSearchResults(resultados, term);
@@ -566,13 +570,16 @@ function categoriasDoJogo(game) {
 // Renderizar blocos divididos por jogo
 function renderBlocks() {
     const jogos = currentGame === 'ALL' ? Object.keys(OFFSETS) : [currentGame];
+    const userPremium = !!(currentUser && currentUser.premium);
     
     let html = '';
     jogos.forEach(game => {
         const info = GAME_LABEL[game] || { titulo: game, sigla: game };
-        const offsets = (OFFSETS[game]?.offsets || []).filter(o => 
+        const offsetsAll = (OFFSETS[game]?.offsets || []).filter(o => 
             currentFilter === 'all' || o.categoria === currentFilter
         );
+        const offsets = offsetsAll.filter(o => userPremium || !o.premium);
+        const premiumBloqueadas = offsetsAll.length - offsets.length;
         const categorias = ['all', ...categoriasDoJogo(game)];
         
         html += `
@@ -583,6 +590,7 @@ function renderBlocks() {
                     <div class="game-block-titles">
                         <h3>OFFSETS ${info.titulo}</h3>
                         <div class="offsets-count"><span>${offsets.length}</span> offsets exibidas</div>
+                        ${!userPremium && premiumBloqueadas > 0 ? `<div class="premium-locked-note"><span class="badge-premium">PREMIUM</span>  ${premiumBloqueadas} offset(s) de ESP/aimbot bloqueadas - veja os planos na aba PREMIUM</div>` : ''}
                     </div>
                 </div>
                 <div class="filter-buttons">
@@ -608,8 +616,8 @@ function renderBlocks() {
                                     const n = escapeHtml(o.nome);
                                     const d = escapeHtml(o.descricao || o.nome);
                                     const cat = escapeHtml(o.categoria);
-                                    return `<tr data-nome="${n}">
-                                        <td class="offset-nome">${n}</td>
+                                    return `<tr data-nome="${n}" ${o.premium ? 'class="premium-row"' : ''}>
+                                        <td class="offset-nome">${n} ${o.premium ? '<span class="badge-premium">PREMIUM</span>' : ''}</td>
                                         <td class="offset-valor">${v}</td>
                                         <td><span class="category-tag category-${cat}">${CATEGORY_LABEL[cat] || cat}</span></td>
                                         <td class="offset-desc">${d}</td>
@@ -666,8 +674,10 @@ function renderBlocks() {
 
 // Resultados globais de pesquisa (janela vertical + tabela resumo)
 function renderSearchResults(resultados, term) {
+    const userPremium = !!(currentUser && currentUser.premium);
     const agrupados = {};
     (resultados || []).forEach(r => {
+        if (!userPremium && r.premium) return;
         (agrupados[r.game] = agrupados[r.game] || []).push(r);
     });
 
@@ -739,10 +749,12 @@ function copyOffset(valor, nome) {
 
 // Atualizar Estatisticas
 function updateStats() {
-    const total = Object.values(OFFSETS).reduce((acc, g) => acc + (g.offsets?.length || 0), 0);
-    const cs2 = OFFSETS['CS2']?.offsets?.length || 0;
-    const fn = OFFSETS['FORTNITE']?.offsets?.length || 0;
-    const rbx = OFFSETS['ROBLOX']?.offsets?.length || 0;
+    const userPremium = !!(currentUser && currentUser.premium);
+    const count = (g) => (OFFSETS[g]?.offsets || []).filter(o => userPremium || !o.premium).length;
+    const total = count('CS2') + count('FORTNITE') + count('ROBLOX');
+    const cs2 = count('CS2');
+    const fn = count('FORTNITE');
+    const rbx = count('ROBLOX');
 
     animateNumber('totalOffsets', total);
     animateNumber('cs2Offsets', cs2);
@@ -814,20 +826,38 @@ async function loadPremiumPlans() {
     }
 
     const isPremium = !!(currentUser && currentUser.premium);
-    const plansHtml = planosPremium.map((plano, idx) => `
-        <div class="plan-card ${idx === 0 ? 'recomendado' : ''}">
-            ${idx === 0 ? '<span class="plan-flag">MAIS POPULAR</span>' : ''}
-            <div class="plan-nome">${escapeHtml(plano.nome)}</div>
-            <div class="plan-preco">
-                <span class="valor">R$ ${Number(plano.valor).toFixed(2)}</span>
-                <span class="periodo">${escapeHtml(plano.periodo || '')}</span>
+
+    const grupos = {};
+    planosPremium.forEach(plano => {
+        (grupos[plano.jogo] = grupos[plano.jogo] || []).push(plano);
+    });
+
+    const gamesOrder = ['ROBLOX', 'CS2', 'FORTNITE'];
+    const order = [...gamesOrder.filter(g => grupos[g]), ...Object.keys(grupos).filter(g => !gamesOrder.includes(g))];
+
+    const plansHtml = order.map((jogo, gi) => `
+        <div class="plans-group">
+            <div class="plans-group-title"><span class="game-sigla">${GAME_LABEL[jogo] ? GAME_LABEL[jogo].sigla : jogo}</span> <span>PLANOS ${GAME_LABEL[jogo] ? GAME_LABEL[jogo].titulo : jogo}</span></div>
+            <div class="plans-grid">
+                ${grupos[jogo].map((plano, idx) => {
+                    const vantagem = idx === 2;
+                    return `
+                    <div class="plan-card ${vantagem ? 'recomendado' : ''}">
+                        ${vantagem ? '<span class="plan-flag">MAIS POPULAR</span>' : ''}
+                        <div class="plan-nome">${escapeHtml(plano.nome)} -- ${escapeHtml(jogo)}</div>
+                        <div class="plan-preco">
+                            <span class="valor">R$ ${Number(plano.valor).toFixed(2)}</span>
+                            <span class="periodo">${escapeHtml(plano.periodo || '')}</span>
+                        </div>
+                        <ul class="plan-beneficios">
+                            ${(plano.beneficios || []).map(b => `<li>${escapeHtml(b)}</li>`).join('')}
+                        </ul>
+                        <button class="btn-pix-click" data-valor="${plano.valor}" data-jogo="${escapeHtml(jogo)}" ${isPremium ? 'disabled' : ''}>
+                            ${isPremium ? 'PREMIUM ATIVO' : 'PAGAR VIA PIX'}
+                        </button>
+                    </div>`;
+                }).join('')}
             </div>
-            <ul class="plan-beneficios">
-                ${(plano.beneficios || []).map(b => `<li>${escapeHtml(b)}</li>`).join('')}
-            </ul>
-            <button class="btn-pix-click" data-valor="${plano.valor}" ${isPremium ? 'disabled' : ''}>
-                ${isPremium ? 'PREMIUM ATIVO' : 'PAGAR VIA PIX'}
-            </button>
         </div>`).join('');
 
     const pixHtml = `

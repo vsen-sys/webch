@@ -48,6 +48,7 @@ function register({ nome, email, senha }) {
   const salt = genSalt();
   const usuario = {
     nome: nome.trim(),
+    username: (nome || '').trim().toLowerCase().replace(/\s+/g, '_'),
     email: key,
     salt,
     senhaHash: hashPassword(senha, salt),
@@ -96,12 +97,18 @@ function resendCode(email) {
   return { ok: true, code, email: key };
 }
 
-function login(email, senha) {
-  const key = (email || '').trim().toLowerCase();
-  const user = db.usuarios[key];
-  if (!user) return { ok: false, message: 'E-mail ou senha incorretos' };
+function findUser(loginValue) {
+  const value = (loginValue || '').trim().toLowerCase();
+  if (!value) return null;
+  if (db.usuarios[value]) return db.usuarios[value];
+  return Object.values(db.usuarios).find(u => (u.username || '').toLowerCase() === value) || null;
+}
+
+function login(loginValue, senha) {
+  const user = findUser(loginValue);
+  if (!user) return { ok: false, message: 'Usuario ou e-mail ou senha incorretos' };
   const hash = hashPassword(senha, user.salt);
-  if (hash !== user.senhaHash) return { ok: false, message: 'E-mail ou senha incorretos' };
+  if (hash !== user.senhaHash) return { ok: false, message: 'Usuario ou e-mail ou senha incorretos' };
   if (!user.verificado) return { ok: false, message: 'Conta nao verificada. Confirme o codigo.' };
   const token = genToken();
   return { ok: true, token, user };
@@ -135,6 +142,7 @@ function activatePremium(email, adminKey, configKey) {
 function publicUser(user) {
   return {
     nome: user.nome,
+    username: user.username || (user.nome || '').toLowerCase().replace(/\s+/g, '_'),
     email: user.email,
     premium: user.premium,
     premiumAtivo: user.premiumAtivo,
