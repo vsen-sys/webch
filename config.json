@@ -1,0 +1,44 @@
+{
+  "projeto": "webch",
+  "diretorio_raiz": "C:\\Users\\Administrator\\Documents\\webch",
+  "agentes": {
+    "frontend": {
+      "id": 1,
+      "nome": "Agente 1 - Frontend",
+      "pasta": "frontend",
+      "responsabilidades": ["HTML", "CSS", "JavaScript", "Design", "UI/UX"]
+    },
+    "pesquisa": {
+      "id": 2,
+      "nome": "Agente 2 - Pesquisador",
+      "pasta": "offsets",
+      "responsabilidades": ["Pesquisar offsets", "Validar dados", "Organizar informacoes"]
+    },
+    "backend": {
+      "id": 3,
+      "nome": "Agente 3 - Backend",
+      "pasta": "backend",
+      "responsabilidades": ["API", "Servidor", "Banco de dados", "Logica"]
+    },
+    "qa": {
+      "id": 4,
+      "nome": "Agente 4 - QA",
+      "pasta": "bugs",
+      "responsabilidades": ["Testes", "Debug", "Atualizacao de offsets", "Qualidade"]
+    }
+  },
+  "pastas": {
+    "frontend": "frontend",
+    "backend": "backend",
+    "offsets": "offsets",
+    "bugs": "bugs",
+    "docs": "docs",
+    "guia": "GUIA OBRIGATORIO"
+  },
+  "extensoes_permitidas": {
+    "frontend": [".html", ".css", ".js", ".json", ".md"],
+    "backend": [".js", ".ts", ".json", ".md", ".env"],
+    "offsets": [".json", ".md"],
+    "bugs": [".md"]
+  }
+}

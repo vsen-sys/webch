@@ -1,4 +1,38 @@
+# Dependencias
 node_modules/
+
+# Sensiveis - nunca subir
+backend/.env
+backend/data/
+backend/server.log
+
+# Sistemas
 *.log
-*.err.log
 .DS_Store
+Thumbs.db
+
+# Gerenciais (docs internos de processo / lixo)
+AUTOMACAO*.md
+AUTOMACAO_CONCLUIDA.md
+COMANDANTE.md
+COMUNICACAO_AUTOMATICA.md
+CONFIGURACAO_COMPLETA.md
+EQUIPE_PRONTA.md
+INSTRUCOES_FINAIS.md
+INSTRUCOES_USO.md
+STATUS*.md
+SETUP_CONCLUIDO.md
+RESUMO_FINAL.md
+status*.md
+LOG.md
+MENSAGEM_PARA_AS_AIS.md
+TAREFA_AUTOMATIZADA.md
+
+# Pastas internas / versoes antigas / relatorios
+versoes_antigas/
+versoes antigas/
+bugs/
+docs/
+GUIA OBRIGATORIO/
+downloads/*.zip
+downloads/*.cfg

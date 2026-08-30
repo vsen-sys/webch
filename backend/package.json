@@ -1,0 +1,22 @@
+{
+  "name": "cs2-offsets-backend",
+  "version": "1.0.0",
+  "description": "Backend para servir offsets do CS2",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^4.18.2",
+    "nodemailer": "^9.0.6",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "author": "Equipe OpenCode",
+  "license": "MIT"
+}

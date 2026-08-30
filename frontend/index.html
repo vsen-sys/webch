@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEBCH - Central de Cheats</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Barra de progresso de scroll + overlay CRT (visual) -->
+    <div class="scroll-progress"></div>
+    <div class="crt-overlay"></div>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-particles" id="particles"></div>
+        <div class="login-container">
+            <span class="corner corner-tl"></span>
+            <span class="corner corner-tr"></span>
+            <span class="corner corner-bl"></span>
+            <span class="corner corner-br"></span>
+            <div class="login-header">
+                <div class="login-logo">
+                    <div class="logo-glitch" data-text="WEBCH">WEBCH</div>
+                </div>
+                <p class="login-subtitle">CENTRAL DE CHEATS</p>
+                <div class="login-version">v2.0 - UNIFIED CHEAT SYSTEM</div>
+                <div class="network-chip"><span class="net-pulse"></span>REDE: 192.168.1.107:8080</div>
+            </div>
+
+            <div class="login-mode-tabs">
+                <button type="button" class="login-mode-btn active" id="modeLoginBtn">ENTRAR</button>
+                <button type="button" class="login-mode-btn" id="modeRegisterBtn">CRIAR CONTA</button>
+            </div>
+
+            <form id="loginForm" class="login-form">
+                <div class="input-group">
+                    <div class="input-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+                    </div>
+                    <input type="text" id="username" placeholder="USUARIO OU E-MAIL" required autocomplete="off">
+                    <div class="input-line"></div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                    </div>
+                    <input type="password" id="password" placeholder="SENHA" required autocomplete="off">
+                    <div class="input-line"></div>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <span class="btn-text">ACESSAR O SISTEMA</span>
+                    <span class="btn-loading" id="loginLoading">
+                        <span class="spinner-small"></span>
+                    </span>
+                </button>
+
+                <div class="login-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="checkmark"></span>
+                        Lembrar-me
+                    </label>
+                    <a href="#" class="forgot-password">Esqueceu a senha?</a>
+                </div>
+
+                <div class="login-status" id="loginStatus"></div>
+            </form>
+
+            <form id="registerForm" class="login-form hidden">
+                <div class="input-group">
+                    <div class="input-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+                    </div>
+                    <input type="text" id="regNome" placeholder="SEU NOME APELIDO" required autocomplete="off">
+                    <div class="input-line"></div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+                    </div>
+                    <input type="email" id="regEmail" placeholder="E-MAIL (GMAIL)" required autocomplete="off">
+                    <div class="input-line"></div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                    </div>
+                    <input type="password" id="regSenha" placeholder="SENHA (MIN 6)" required autocomplete="off">
+                    <div class="input-line"></div>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <span class="btn-text">CRIAR CONTA E ENVIAR CODIGO</span>
+                    <span class="btn-loading" id="registerLoading">
+                        <span class="spinner-small"></span>
+                    </span>
+                </button>
+
+                <div class="login-status" id="registerStatus"></div>
+            </form>
+
+            <form id="verifyForm" class="login-form hidden">
+                <div class="verify-info">
+                    <p>Digite o codigo de verificacao enviado para o seu Gmail.</p>
+                    <p class="verify-email" id="verifyEmailLabel">-</p>
+                </div>
+                <div class="input-group">
+                    <div class="input-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                    </div>
+                    <input type="text" id="verifyCode" placeholder="CODIGO (6 DIGITOS)" required autocomplete="off" maxlength="6" inputmode="numeric">
+                    <div class="input-line"></div>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <span class="btn-text">CONFIRMAR CODIGO</span>
+                    <span class="btn-loading" id="verifyLoading">
+                        <span class="spinner-small"></span>
+                    </span>
+                </button>
+
+                <div class="login-options">
+                    <a href="#" class="forgot-password" id="resendLink">Reenviar codigo</a>
+                    <a href="#" class="forgot-password" id="backToLogin">Voltar</a>
+                </div>
+
+                <div class="login-status" id="verifyStatus"></div>
+            </form>
+
+            <div class="login-footer">
+                <div class="security-badge">
+                    <span class="lock-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c-4-1.6-7-4.6-7-9V5l7-3 7 3v8c0 4.4-3 7.4-7 9z"/></svg>
+                    </span>
+                    <span>CONEXAO SEGURA</span>
+                </div>
+                <p class="copyright">© 2026 bechtcode - Todos os direitos reservados</p>
+            </div>
+        </div>
+
+        <div class="login-bg-effects">
+            <div class="hexagon hex-1"></div>
+            <div class="hexagon hex-2"></div>
+            <div class="hexagon hex-3"></div>
+            <div class="scan-line"></div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="mainApp" class="main-app hidden">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="logo">
+                    <div class="logo-mini" data-text="W">W</div>
+                    <h1>WEBCH</h1>
+                    <span class="header-badge">CHEAT CENTRAL</span>
+                </div>
+                <nav class="nav">
+                    <a href="#home" class="nav-link active">
+                        <span class="nav-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+                        </span>
+                        <span class="nav-text">Home</span>
+                    </a>
+                    <a href="#offsets" class="nav-link">
+                        <span class="nav-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="19" x2="5" y2="10"/><line x1="10" y1="19" x2="10" y2="5"/><line x1="15" y1="19" x2="15" y2="12"/><line x1="20" y1="19" x2="20" y2="8"/></svg>
+                        </span>
+                        <span class="nav-text">Offsets</span>
+                    </a>
+                    <a href="#status" class="nav-link">
+                        <span class="nav-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg>
+                        </span>
+                        <span class="nav-text">Status</span>
+                    </a>
+                    <a href="#apps" class="nav-link">
+                        <span class="nav-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        </span>
+                        <span class="nav-text">Apps</span>
+                    </a>
+                    <a href="#premium" class="nav-link">
+                        <span class="nav-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l9-12 9 12-4 4-5-3-5 3-4-4z"/><path d="M3 21h18"/></svg>
+                        </span>
+                        <span class="nav-text">Premium</span>
+                    </a>
+                    <a href="#sobre" class="nav-link">
+                        <span class="nav-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="8" r="1"/></svg>
+                        </span>
+                        <span class="nav-text">Sobre</span>
+                    </a>
+                </nav>
+                <div class="user-panel">
+                    <div class="user-info">
+                        <span class="user-avatar" id="userAvatar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+                        </span>
+                        <span class="user-name" id="userName">User</span>
+                        <span class="user-premium-badge" id="userPremiumBadge" style="display:none">PREMIUM</span>
+                    </div>
+                    <button class="logout-btn" id="logoutBtn" title="Sair">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h-6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6"/><path d="M17 8l4 4-4 4"/><path d="M21 12H9"/></svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Hero Section -->
+            <section id="home" class="hero">
+                <div class="hero-bg">
+                    <div class="matrix-rain" id="matrixRain"></div>
+                </div>
+                <div class="container">
+                    <div class="hero-content">
+                        <h2 class="hero-title">
+                            <span class="title-line">CENTRAL DE</span>
+                            <span class="title-highlight">CHEATS</span>
+                        </h2>
+                        <p class="hero-desc">Sistema unificado de gerenciamento de offsets e ferramentas para CS2</p>
+                        <div class="hero-badges">
+                            <span class="badge pulse-badge">
+                                <span class="badge-dot"></span>
+                                ONLINE
+                            </span>
+                            <span class="badge version-badge">v2.0</span>
+                            <span class="badge update-badge">ATUALIZADO: 29/08/2026</span>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <span class="stat-value" id="heroOffsets">50</span>
+                                <span class="stat-label">Offsets</span>
+                            </div>
+                            <div class="hero-stat">
+                                <span class="stat-value">99%</span>
+                                <span class="stat-label">Uptime</span>
+                            </div>
+                            <div class="hero-stat">
+                                <span class="stat-value">24/7</span>
+                                <span class="stat-label">Suporte</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="container">
+                    <div class="search-box">
+                        <div class="search-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+                        </div>
+                        <input type="text" id="searchInput" placeholder="Pesquisar offset em todos os jogos... (ex: DwEntityList, AmmoCount, Pointer)" autocomplete="off">
+                        <button id="searchBtn" class="btn btn-primary">
+                            <span>Buscar</span>
+                        </button>
+                    </div>
+                    <div class="search-hint">API de pesquisa: /api/offsets/search?q=offset</div>
+                </div>
+            </section>
+
+            <!-- Game Selector -->
+            <section class="game-selector-section">
+                <div class="container">
+                    <div class="game-tabs" id="gameTabs">
+                        <button class="btn btn-game active" data-game="CS2">CS2</button>
+                        <button class="btn btn-game" data-game="FORTNITE">FORTNITE</button>
+                        <button class="btn btn-game" data-game="ROBLOX">ROBLOX</button>
+                        <button class="btn btn-game" data-game="ALL">TODOS</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Offsets Sections (dividido por jogo) -->
+            <section id="offsets" class="offsets-section">
+                <div class="container">
+                    <div id="gameBlocks"></div>
+                    <div class="loading" id="loading">
+                        <div class="loading-spinner">
+                            <div class="spinner-ring"></div>
+                        </div>
+                        <span>Carregando offsets...</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="container">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper">
+                                <span class="stat-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="19" x2="5" y2="10"/><line x1="10" y1="19" x2="10" y2="5"/><line x1="15" y1="19" x2="15" y2="12"/><line x1="20" y1="19" x2="20" y2="8"/></svg>
+                                </span>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-number" id="totalOffsets">0</span>
+                                <span class="stat-label">Total de Offsets</span>
+                            </div>
+                            <div class="stat-bar"></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper">
+                                <span class="stat-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+                                </span>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-number" id="cs2Offsets">0</span>
+                                <span class="stat-label">Offsets CS2</span>
+                            </div>
+                            <div class="stat-bar"></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper">
+                                <span class="stat-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="4"/></svg>
+                                </span>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-number" id="fortniteOffsets">0</span>
+                                <span class="stat-label">Offsets Fortnite</span>
+                            </div>
+                            <div class="stat-bar"></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper">
+                                <span class="stat-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><line x1="12" y1="1" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="1" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="23" y2="12"/></svg>
+                                </span>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-number" id="robloxOffsets">0</span>
+                                <span class="stat-label">Offsets Roblox</span>
+                            </div>
+                            <div class="stat-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Status Section -->
+            <section id="status" class="status-section">
+                <div class="container">
+                    <h3>STATUS DO SISTEMA</h3>
+                    <div class="status-grid">
+                        <div class="status-card">
+                            <div class="status-indicator online"></div>
+                            <div class="status-info">
+                                <span class="status-name">Backend API</span>
+                                <span class="status-text">Funcionando</span>
+                            </div>
+                            <span class="status-ping">12ms</span>
+                        </div>
+                        <div class="status-card">
+                            <div class="status-indicator online"></div>
+                            <div class="status-info">
+                                <span class="status-name">Banco de Dados</span>
+                                <span class="status-text">Conectado</span>
+                            </div>
+                            <span class="status-ping">8ms</span>
+                        </div>
+                        <div class="status-card">
+                            <div class="status-indicator online"></div>
+                            <div class="status-info">
+                                <span class="status-name">Offsets CS2</span>
+                                <span class="status-text">Atualizadas</span>
+                            </div>
+                            <span class="status-ping">3ms</span>
+                        </div>
+                        <div class="status-card">
+                            <div class="status-indicator online"></div>
+                            <div class="status-info">
+                                <span class="status-name">Frontend</span>
+                                <span class="status-text">Carregado</span>
+                            </div>
+                            <span class="status-ping">5ms</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Apps / Downloads Section -->
+            <section id="apps" class="apps-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h3>APPS E DOWNLOADS</h3>
+                    </div>
+                    <div class="apps-grid" id="appsGrid">
+                        <!-- Apps carregados via JavaScript -->
+                    </div>
+                    <div class="apps-note">
+                        <p>Pasta de apps: <code>C:\Users\Administrator\Documents\webch\downloads</code></p>
+                        <p>Coloque os arquivos na pasta acima e atualize a lista no arquivo <code>frontend/js/apps-data.js</code>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Premium Section -->
+            <section id="premium" class="premium-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h3>PREMIUM</h3>
+                    </div>
+                    <div class="premium-banner" id="premiumBanner">
+                        <p>Conteudo premium: apps mais complexos e offsets atualizadas <strong>constantemente</strong>.</p>
+                    </div>
+                    <div id="premiumContent"></div>
+                    <div id="premiumExtra"></div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="sobre" class="about-section">
+                <div class="container">
+                    <h3>SOBRE O PROJETO</h3>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p>O <strong>WEBCH</strong> e um sistema automatizado desenvolvido para gerenciar offsets do Counter-Strike 2.</p>
+                            <h4>FUNCIONALIDADES</h4>
+                            <ul>
+                                <li><span class="feature-icon"></span> Exibicao de offsets atualizadas</li>
+                                <li><span class="feature-icon"></span> Busca por nome ou categoria</li>
+                                <li><span class="feature-icon"></span> Copiacao com um clique</li>
+                                <li><span class="feature-icon"></span> Status do sistema em tempo real</li>
+                                <li><span class="feature-icon"></span> Design responsivo e moderno</li>
+                            </ul>
+                            <h4>TECNOLOGIAS</h4>
+                            <div class="tech-tags">
+                                <span class="tech-tag">HTML5</span>
+                                <span class="tech-tag">CSS3</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Express</span>
+                            </div>
+                        </div>
+                        <div class="about-team">
+                            <h4>EQUIPE BECHTCODE</h4>
+                            <div class="team-members">
+                                <div class="member">
+                                    <span class="member-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="11" y2="12"/><line x1="7" y1="13" x2="11" y2="12"/><line x1="12" y1="15" x2="17" y2="15"/></svg>
+                                    </span>
+                                    <div class="member-info">
+                                        <span class="member-name">WEBCHT</span>
+                                        <span class="member-role">Fundador</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <span class="footer-brand">WEBCH</span>
+                        <span class="footer-tagline">Central de Cheats</span>
+                    </div>
+                    <p class="footer-copyright">© 2026 bechtcode - Todos os direitos reservados</p>
+                    <p class="footer-net"><span class="net-pulse"></span>ACESSO PELA REDE: <a href="http://192.168.1.107:8080">http://192.168.1.107:8080</a></p>
+                    <div class="footer-links">
+                        <a href="#home">Home</a>
+                        <a href="#offsets">Offsets</a>
+                        <a href="#apps">Apps</a>
+                        <a href="#premium">Premium</a>
+                        <a href="#status">Status</a>
+                        <a href="#sobre">Sobre</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-icon" id="toastIcon"></div>
+        <span class="toast-message" id="toastMessage"></span>
+    </div>
+
+    <script src="js/offsets-data.js"></script>
+    <script src="js/apps-data.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

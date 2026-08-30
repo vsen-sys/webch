@@ -1,0 +1,74 @@
+{
+  "planos": [
+    {
+      "id": "mensal",
+      "nome": "PREMIUM MENSAL",
+      "valor": 19.90,
+      "periodo": "/ mes",
+      "beneficios": [
+        "Acesso a area Premium",
+        "Apps mais complexos (menu de cheats em jogo)",
+        "Offsets atualizadas constantemente",
+        "Offset exclusivas premium",
+        "Suporte prioritario"
+      ]
+    },
+    {
+      "id": "vitalicio",
+      "nome": "PREMIUM VITALICIO",
+      "valor": 49.90,
+      "periodo": "pagamento unico",
+      "beneficios": [
+        "Tudo do plano mensal",
+        "Acesso vitalicio sem mensalidade",
+        "Todas as futuras atualizacoes incluidas",
+        "Acesso antecipado a apps novos",
+        "Suporte VIP direto"
+      ]
+    }
+  ],
+  "appsPremium": [
+    {
+      "id": "nexus-menu",
+      "nome": "NEXUS MENU",
+      "versao": "v3.2",
+      "descricao": "Menu de cheats em jogo com ESP, aim assist e visuais. Requer premium.",
+      "complexidade": "AVANCADO",
+      "arquivo": "nexus-menu.zip"
+    },
+    {
+      "id": "aim-advanced",
+      "nome": "AIM ASSIST PRO",
+      "versao": "v2.7",
+      "descricao": "Aim assist com controle fino de sensibilidade, FOV e smoothing.",
+      "complexidade": "AVANCADO",
+      "arquivo": "aim-assist-pro.zip"
+    },
+    {
+      "id": "esp-stream",
+      "nome": "ESP STREAM PROOF",
+      "versao": "v1.9",
+      "descricao": "ESP com modo stream proof (passa nos OBS enquanto joga).",
+      "complexidade": "VITALICIO",
+      "arquivo": "esp-stream-pro.zip"
+    },
+    {
+      "id": "config-library",
+      "nome": "BIBLIOTECA DE CONFIGS",
+      "versao": "v4.1",
+      "descricao": "Configs premium atualizadas constantemente para varios cenarios.",
+      "complexidade": "CONSTANTE",
+      "arquivo": "configs-premium.zip"
+    }
+  ],
+  "offsetsPremium": [
+    { "jogo": "CS2", "nome": "m_pGameSceneNode", "valor": "0x2D8", "categoria": "premium", "descricao": "Acesso a visuais avancados (skinchanger, animacoes)" },
+    { "jogo": "CS2", "nome": "m_aimPunchCache", "valor": "0x1D6C", "categoria": "premium", "descricao": "Controle de recoil / no-recoil" },
+    { "jogo": "CS2", "nome": "AnimScriptHandle", "valor": "0x1E58", "categoria": "premium", "descricao": "Manipulacao de animacoes" },
+    { "jogo": "FORTNITE", "nome": "FortValidWeaponDef", "valor": "0x958", "categoria": "premium", "descricao": "Validacao de armas" },
+    { "jogo": "ROBLOX", "nome": "RemoteEvent.Caching", "valor": "0x4A8", "categoria": "premium", "descricao": "Controle avancado de remotes" },
+    { "jogo": "ROBLOX", "nome": "Humanoid.AutoRotate", "valor": "0x2E4", "categoria": "premium", "descricao": "Rotacao automatica avancada" }
+  ],
+  "atualizadoEm": "2026-08-29T00:00:00.000Z",
+  "nota": "Conteudo premium atualizado constantemente com offsets e apps novos."
+}
